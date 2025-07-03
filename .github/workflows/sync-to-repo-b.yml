@@ -1,3 +1,5 @@
+
+
 name: Sync to repo-b
 on:
   push:
@@ -22,15 +24,15 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
       
-      - name: Clone target repository (repo-b)
+      - name: Clone target repository (repo-a)
         run: |
           echo "Cloning target repository..."
-          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/vikas1509/repo-b.git
-          echo "✅ Successfully cloned repo-b"
+          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/vikas1509/repo-a.git
+          echo "✅ Successfully cloned repo-a"
       
       - name: Sync files to target repository
         run: |
-          echo "Syncing files from repo-a to repo-b..."
+          echo "Syncing files from Repo1 to repo-a..."
           # Copy all files except .git directory and target repo directory
           rsync -av --exclude='.git' --exclude='repo-b' ./ repo-b/
           echo "✅ Files synced successfully"
@@ -56,11 +58,11 @@ jobs:
           echo "Committing changes..."
           git commit -m "Sync from repo-a [sync-skip]
 
-          🔄 Auto-sync from Repo1
+          🔄 Auto-sync from repo-a
           Original commit: ${{ github.sha }}
           Original message: ${{ github.event.head_commit.message }}"
           
           # Push to main branch
           echo "Pushing changes to repo-b..."
           git push origin main
-          echo "✅ Successfully synced repo-b → repo-b"
+          echo "✅ Successfully synced Repo1 → repo-b"
