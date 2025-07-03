@@ -1,4 +1,4 @@
-name: Sync to Repo-2
+name: Sync to repo-b
 on:
   push:
     branches:
@@ -11,7 +11,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[sync-skip]')"
     
     steps:
-      - name: Checkout Repo1 (source)
+      - name: Checkout repo-a (source)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
